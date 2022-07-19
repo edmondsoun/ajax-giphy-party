@@ -1,11 +1,9 @@
 'use strict';
 console.log("Let's get this party started!");
 
-// When the user submits the form, use axios to make a request to GIPHY
-// for information based on that term.
-
-
-// function to pull data
+/** Takes form input and requests GIF url from Giphy.
+ *  Calls addGif.
+ */
 
 async function getGif(event) {
 
@@ -14,17 +12,16 @@ async function getGif(event) {
     let searchTerm = $("#inputField").val();
     //diffence between val and text here?
 
-    //make axios request
     let response = await axios.get(
         `http://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym`)
+    //second argument?
 
-// After receiving the response, console.log the response data to make
-// sure you’re getting back what you expect.
-    console.log("got", response);
-    console.log(response.data.data[0].images.original.url);
-    return response.data;
+    addGif(response.data.data[0].images.original.url);
 
 }
+
+/** Appends GIF to DOM.
+ */
 
 function addGif(gifUrl){
 
@@ -32,11 +29,16 @@ function addGif(gifUrl){
 
 }
 
-// event handler for the button
+/** Removes all GIFs. */
+
+function removeGifs(){
+    $('#gifList').html('');
+}
+
+/** Event handlers for submit and remove buttons. */
 
 $('#searchButton').on('click', getGif);
-
-//add remove gifs button
+$('#clearButton').on('click', removeGifs);
 
 
 
