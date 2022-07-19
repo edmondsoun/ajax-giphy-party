@@ -10,13 +10,13 @@ async function getGif(event) {
     event.preventDefault();
 
     let searchTerm = $("#inputField").val();
-    //diffence between val and text here?
 
     let response = await axios.get(
         `http://api.giphy.com/v1/gifs/search?q=${searchTerm}&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym`)
-    //second argument?
 
     addGif(response.data.data[0].images.original.url);
+    //potential for object destructuring?
+
 
 }
 
@@ -39,6 +39,8 @@ function removeGifs(){
 
 $('#searchButton').on('click', getGif);
 $('#clearButton').on('click', removeGifs);
+
+//handleSubmit
 
 
 
